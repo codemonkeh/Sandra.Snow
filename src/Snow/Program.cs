@@ -123,28 +123,38 @@
                 {
                     var sourceDir = (settings.ThemesDir + Path.DirectorySeparatorChar + settings.Theme + Path.DirectorySeparatorChar + copyDirectory);
 
-                    var destinationDir = copyDirectory;
+                    var destinationDir = copyDirectory;                    
 
+                    string source = string.Empty;
                     if (copyDirectory.Contains(" => "))
                     {
                         var directorySplit = copyDirectory.Split(new[] { " => " }, StringSplitOptions.RemoveEmptyEntries);
 
-                        sourceDir = directorySplit[0];
-                        destinationDir = directorySplit[1];
+                        source = Path.Combine(settings.CurrentDir, directorySplit[0]);
+                        if (!Directory.Exists(source))
+                        {
+                            copyDirectory.OutputIfDebug($"Unable to find source directory identified by lambda, so we're skipping it: ");
+                            continue;
+                        }
+
+                        destinationDir = directorySplit[1];                        
                     }
-
-                    var source = Path.Combine(settings.CurrentDir, sourceDir);
-
-                    if (!Directory.Exists(source))
+                    else
                     {
-                        source = Path.Combine(settings.CurrentDir, copyDirectory);
+                        source = Path.Combine(settings.CurrentDir, sourceDir);
 
                         if (!Directory.Exists(source))
                         {
-                            copyDirectory.OutputIfDebug("Unable to find the directory, so we're skipping it: ");
-                            continue;
+                            copyDirectory.OutputIfDebug($"Unable to find source directory but attempting to continue output resolution: ");
+                            source = Path.Combine(settings.CurrentDir, copyDirectory);
+
+                            if (!Directory.Exists(source))
+                            {
+                                copyDirectory.OutputIfDebug($"Unable to find source directory, so we're skipping it: ");
+                                continue;
+                            }
                         }
-                    }
+                    }                                       
 
                     // If the destination directory is "." copy the folder files to the output folder root
                     var destination = destinationDir == "." ? settings.PostsOutput : Path.Combine(settings.PostsOutput, destinationDir);
