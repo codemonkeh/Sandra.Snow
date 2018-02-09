@@ -8,6 +8,7 @@
     public class ContentViewModel : BaseViewModel
     {
         public List<Post> PostsInCategory { get; set; }
+        public List<Post> PostsInTag { get; set; }
         public Dictionary<int, Dictionary<int, List<Post>>> PostsGroupedByYearThenMonth { get; set; }
 
         /// <summary>
@@ -23,7 +24,7 @@
 
         public string GetMonth(int month)
         {
-            return DateTime.ParseExact("2013/" + month + "/1", "yyyy/M/d", CultureInfo.InvariantCulture).ToString("MMMM");
+            return DateTime.ParseExact("2015/" + month + "/1", "yyyy/M/d", CultureInfo.InvariantCulture).ToString("MMMM");
         }
     }
 }

@@ -40,5 +40,15 @@
         {
             return post.Published == Published.True;
         }
+
+        public static bool Tag(Post post)
+        {
+            return IsPublished(post) && IsInThePast(post);
+        }
+
+        public static bool Tag(Tag tag)
+        {
+            return tag.Count > 0;
+        }
     }
 }

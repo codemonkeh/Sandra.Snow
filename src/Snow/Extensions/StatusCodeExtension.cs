@@ -15,7 +15,7 @@
                 body.Contains("<p>We tried, we really did, but we just can't compile your view.</p>"))
             {
                 var match =
-                    Regex.Match(body, "<pre id=\"errorContents\">(?<content>.*)&lt;!DOCTYPE html&gt;", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                    Regex.Match(body, "<pre id=\"errorContents\">(?<content>.*)", RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
                 var message = (match.Success) ?
                     match.Groups["content"].Value :

@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="ArchiveMenu.cs" />
     <Compile Include="ArchivePage.cs" />
+    <Compile Include="TagsPage.cs" />
     <Compile Include="CategoriesPage.cs" />
     <Compile Include="Enums\Published.cs" />
     <Compile Include="Extensions\AtomResponse.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Extensions\SitemapResponse.cs" />
     <Compile Include="Extensions\SlugExtensions.cs" />
     <Compile Include="Extensions\PostHeaderExtensions.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="PagesParser.cs" />
     <Compile Include="PostParsers\MarkdownFileParser.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="ShouldProcess.cs" />
     <Compile Include="SnowServer.cs" />
     <Compile Include="StaticFileProcessors\AtomProcessor.cs" />
+    <Compile Include="StaticFileProcessors\TagProcessor.cs" />
     <Compile Include="StaticFileProcessors\CategoriesProcessor.cs" />
     <Compile Include="StaticFileProcessors\DraftsProcessor.cs" />
     <Compile Include="StaticFileProcessors\RssProcessor.cs" />

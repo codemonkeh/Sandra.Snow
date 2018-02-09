@@ -10,6 +10,7 @@
         public Post()
         {
             Categories = Enumerable.Empty<string>();
+            Tags = Enumerable.Empty<string>();
         }
 
         public virtual void SetSnowSettings(SnowSettings defaults)
@@ -76,7 +77,10 @@
                     case "tags":
                     case "keywords":
                         {
-                            Keywords = (string)setting.Value;
+                            var tags = ((string) setting.Value)
+                                .Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+
+                                Tags = tags.Select(x => x.Trim()).OrderBy(x => x);
 
                             break;
                         }
@@ -87,8 +91,7 @@
         public string MetaDescription { get; set; }
 
         public Series Series { get; set; }
-
-
+        
         private string excerpt;
         public string ContentExcerpt
         {
@@ -108,7 +111,7 @@
         public string Email { get; set; }
 
         public IEnumerable<string> Categories { get; set; }
-        public string Keywords { get; set; }
+        public IEnumerable<string> Tags { get; set; }
 
         public Published Published { get; set; }
         public string Title { get; set; }

@@ -87,6 +87,7 @@
                 TestModule.Posts = posts.Where(x => x.Published == Published.True).ToList();
                 TestModule.Drafts = posts.Where(x => x.Published == Published.Draft).ToList();
                 TestModule.Categories = CategoriesPage.Create(posts);
+                TestModule.Tags = TagsPage.Create(posts);
                 TestModule.PostsGroupedByYearThenMonth = ArchivePage.Create(posts);
                 TestModule.MonthYear = ArchiveMenu.Create(posts);
                 TestModule.Settings = settings;
@@ -190,6 +191,14 @@
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.ToString());
 
+                //CF: Add additional information
+                var innerEx = ex.InnerException;
+                while (innerEx != null)
+                {
+                    Console.WriteLine(innerEx.ToString());
+                    innerEx = innerEx.InnerException;
+                }
+
                 DebugHelperExtensions.WaitForContinue();
             }
         }
@@ -234,6 +243,15 @@
                 Console.WriteLine(" - Message:");
                 Console.WriteLine();
                 Console.WriteLine(exception.Message);
+                Console.WriteLine(exception.ToString());
+
+                //CF: Add additional information
+                var innerEx = exception.InnerException;
+                while (innerEx != null)
+                {
+                    Console.WriteLine(innerEx.ToString());
+                    innerEx = innerEx.InnerException;
+                }
 
                 return false;
             }
@@ -330,6 +348,15 @@
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.ToString());
+
+                //CF: Add additional information
+                var innerEx = ex.InnerException;
+                while (innerEx != null)
+                {
+                    Console.WriteLine(innerEx.ToString());
+                    innerEx = innerEx.InnerException;
+                }
             }
         }
 
@@ -364,8 +391,18 @@
 
                 File.WriteAllText(outputFile, body);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.ToString());
+
+                //CF: Add additional information
+                var innerEx = ex.InnerException;
+                while (innerEx != null)
+                {
+                    Console.WriteLine(innerEx.ToString());
+                    innerEx = innerEx.InnerException;
+                }
             }
         }
     }

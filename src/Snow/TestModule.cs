@@ -29,11 +29,13 @@
         public static List<Post> PostsPaged { get; set; }
         public static List<Post> PostsInCategory { get; set; }
         public static Category Category { get; set; }
+        public static Tag Tag { get; set; }
         public static int PageNumber { get; set; }
 
         //Properties are set and never change...
         public static List<Post> Posts { get; set; }
         public static List<Category> Categories { get; set; }
+        public static List<Tag> Tags { get; set; }
         public static Dictionary<int, Dictionary<int, List<Post>>> PostsGroupedByYearThenMonth { get; set; }
         public static int TotalPages { get; set; }
 
@@ -46,6 +48,8 @@
 
         public static List<Post> Drafts { get; set; }
         public static List<Page> Pages { get; set; }
+        public static List<Post> PostsInTag { get; set; }
+
 
         public TestModule()
         {
@@ -56,7 +60,9 @@
                 {
                     GeneratedUrl = GeneratedUrl,
                     PostsInCategory = PostsInCategory,
+                    PostsInTag = PostsInTag,
                     AllCategories = Categories,
+                    AllTags = Tags,
                     Posts = Posts,
                     PostsPaged = PostsPaged,
                     Pages = Pages,
@@ -68,6 +74,7 @@
                     MonthYearList = MonthYear,
                     GeneratedDate = GeneratedDate,
                     Category = Category,
+                    Tag = Tag,
                     Drafts = Drafts,
                     Published = Published
                 };
@@ -92,8 +99,9 @@
                     GeneratedDate = GeneratedDate,
                     Url = Data.Url,
                     AllCategories = Categories,
+                    AllTags = Tags,
                     Categories = Data.Categories.Select(c => new Category { Name = c }).ToList(),
-                    Keywords = Data.Keywords,
+                    Tags = Data.Tags.Select(c => new Tag { Name = c }).ToList(),
                     MonthYearList = MonthYear,
                     Author = Data.Author,
                     Email = Data.Email,
